@@ -38,7 +38,7 @@ app.get('/todos/:id', (req, res) => {
     } else {
         Todo.findById(id).then((todo) => {
             if (todo) {
-                res.status(200).send({todo:todo});
+                res.status(200).send({ todo: todo });
             } else {
                 res.status(404).send();
             }
@@ -47,7 +47,20 @@ app.get('/todos/:id', (req, res) => {
         });
     }
 });
-
+app.delete('/todos/:id', (req, res) => {
+    var id = req.params.id;
+    if (!ObjectID.isValid(id))
+        return res.status(404).send();
+    Todo.findByIdAndRemove(id).then((todo) => {
+        if (!todo) {
+            return res.status(404).send();
+        } else {
+            return res.status(200).send(todo);
+        }
+    }).catch((e) => {
+        return res.status(400).send();
+    });
+});
 
 app.listen(port, () => {
     console.log(`Started on port ${port}`);

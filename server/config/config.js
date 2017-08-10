@@ -7,4 +7,6 @@ if(env === 'development'){
 }else if (env === 'test'){
     process.env.PORT = 3000;
     process.env.MONGODB_URI = 'mongodb://138.68.154.195:27017/TodoAppTest';
+    // process.env.MONGODB_URI = 'mongodb://localhost:27017/TodoAppTest';
+
 }

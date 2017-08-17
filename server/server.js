@@ -10,6 +10,21 @@ var { Todo } = require('./models/todo');
 var { User } = require('./models/user');
 var { authenticate } = require('./middleware/authenticate');
 
+var test  = [{
+ 'test' : 'a'   
+},
+{
+ 'test' : 'b'
+},
+{
+ 'test' : 'c'
+}];
+console.log(test[0]);
+
+_.forEach(test, function(value){
+    console.log(value);
+});
+
 var app = express();
 var port = process.env.PORT;
 app.use(bodyParser.json());

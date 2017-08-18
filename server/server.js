@@ -10,20 +10,6 @@ var { Todo } = require('./models/todo');
 var { User } = require('./models/user');
 var { authenticate } = require('./middleware/authenticate');
 
-var test  = [{
- 'test' : 'a'   
-},
-{
- 'test' : 'b'
-},
-{
- 'test' : 'c'
-}];
-console.log(test[0]);
-
-_.forEach(test, function(value){
-    console.log(value);
-});
 
 var app = express();
 var port = process.env.PORT;
@@ -134,6 +120,15 @@ app.post('/users/login', (req, res) => {
     });
 
 });
+
+app.delete('/users/me/token', authenticate , (req, res)=>{
+    req.user.removeToken(req.token).then(() => {
+        res.status(200).send();
+    }).catch((e) => {
+        res.status(400).send();
+    });
+});
+
 
 app.listen(port, () => {
     console.log(`Started on port ${port}`);
